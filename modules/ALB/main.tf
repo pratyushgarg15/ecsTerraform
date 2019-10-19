@@ -1,5 +1,5 @@
 resource "aws_lb" "pratyushALB" {
-  name               = "pratyushLT"
+  name               = "pratyushALB"
   internal           = false
   load_balancer_type = "application"
   security_groups    = [var.security_group_id]
@@ -11,7 +11,7 @@ resource "aws_lb" "pratyushALB" {
 }
 
 resource "aws_lb_target_group" "pratyushTG" {
-  name     = "tf-example-lb-tg"
+  name     = "pratyushTG"
   port     = 80
   protocol = "HTTP"
   vpc_id   = var.vpc-id
