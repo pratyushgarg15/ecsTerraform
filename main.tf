@@ -38,5 +38,10 @@ module "ASG" {
 
 }
 
+module "Ecs" {
+  source = "./modules/ECS/"
+  
+}
+
 
 #remember to open all the tcp ports when using sg in ecs
