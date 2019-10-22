@@ -38,10 +38,12 @@ module "ASG" {
 
 }
 
-module "Ecs" {
-  source = "./modules/ECS/"
+# module "Ecs" {
+#   source = "./modules/ECS/"
   
-}
+#   tg_arn            = module.ALB.tg_arn
+  
+# }
 
 
 #remember to open all the tcp ports when using sg in ecs

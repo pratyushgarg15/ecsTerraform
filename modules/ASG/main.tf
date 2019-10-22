@@ -1,9 +1,11 @@
 resource "aws_launch_template" "pratyushLT" {
-  name   = "pratyushLT"
-  image_id      = "ami-04b9e92b5572fa0d1"
-  instance_type = "t2.micro"
-  key_name      = "pat-key"
-  vpc_security_group_ids = [var.security_group_id]
+  name                    = "pratyushLT"
+  image_id                = "ami-0f846c06eb372f19a"
+  instance_type           = "t2.micro"
+  key_name                = "pat-key"
+  vpc_security_group_ids  = [var.security_group_id]
+  #iam_instance_profile    = var.ecs-instance-profile-name
+  user_data               = file("${path.module}/userdata.sh")
 }
 
 resource "aws_autoscaling_group" "pratyushASG" {
@@ -21,3 +23,6 @@ resource "aws_autoscaling_group" "pratyushASG" {
   }
 }
 
+# resource "template_file" "ecs-launch-configuration-user-data" {
+#     template = file("${path.module}/userdata.sh")
+# }
