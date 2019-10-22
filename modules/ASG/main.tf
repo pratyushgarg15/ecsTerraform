@@ -4,6 +4,7 @@ resource "aws_launch_template" "pratyushLT" {
   instance_type           = "t2.micro"
   key_name                = "pat-key"
   vpc_security_group_ids  = [var.security_group_id]
+  iam_instance_profile    = var.ecs-instance-profile-name
   #iam_instance_profile    = var.ecs-instance-profile-name
   user_data               = file("${path.module}/userdata.sh")
 }

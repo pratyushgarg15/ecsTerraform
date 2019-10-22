@@ -35,6 +35,7 @@ module "ASG" {
   aws_subnet_public = module.VPC.public_subnet_ids
   tg_arn            = module.ALB.tg_arn
   security_group_id = module.SG.sg_id
+  ecs-instance-profile-name = module.ECS.aws-instance-profile-name
 
 }
 

@@ -10,13 +10,20 @@ resource "aws_ecs_task_definition" "pratyushNginx" {
 resource "aws_ecs_service" "Service" {
   name = "pratyushService"
   cluster = aws_ecs_cluster.pratyushECS.id
-  task_definition = aws_ecs_task_definition..arn
+  task_definition = aws_ecs_task_definition.pratyushNginx.arn
 
   desired_count = 1
 
   deployment_maximum_percent = 200
   deployment_minimum_healthy_percent = 100
   iam_role = aws_iam_role.ecs-service-role.name
+
+
+  	load_balancer {
+    	target_group_arn  = var.ecs-target-group-arn
+    	container_port    = 80
+    	container_name    = "nginx"
+	}
 
 }
 

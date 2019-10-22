@@ -15,3 +15,8 @@ variable "security_group_id" {
     default     = ""
 }
 
+variable "ecs-instance-profile-name" {
+    type        = string
+    default     = ""
+}
+
