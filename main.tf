@@ -35,16 +35,16 @@ module "ASG" {
   aws_subnet_public = module.VPC.public_subnet_ids
   tg_arn            = module.ALB.tg_arn
   security_group_id = module.SG.sg_id
-  ecs-instance-profile-name = module.ECS.aws-instance-profile-name
+  ecs-instance-profile-name = module.ECS.ecs-instance-profile-name
 
 }
 
-# module "Ecs" {
-#   source = "./modules/ECS/"
+module "ECS" {
+  source = "./modules/ECS/"
   
-#   tg_arn            = module.ALB.tg_arn
-  
-# }
+  ecs-target-group-arn = module.ALB.tg_arn
+  ecs-lb-arn           = module.ALB.lb-arn
+}
 
 
 #remember to open all the tcp ports when using sg in ecs

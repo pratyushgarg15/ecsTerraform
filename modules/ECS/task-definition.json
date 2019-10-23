@@ -1,8 +1,4 @@
-{
-    "requiresCompatibilities": [
-      "EC2"
-    ],
-    "containerDefinitions": [
+ [
       {
         "name": "nginx",
         "image": "nginx:latest",
@@ -25,10 +21,6 @@
             }
         }
       }
-    ],
-    "volumes": [],
-    "networkMode": "bridge",
-    "placementConstraints": [],
-    "family": "nginx"
-  }
+  ]
+    
   

@@ -4,7 +4,22 @@ resource "aws_ecs_cluster" "pratyushECS" {
 
 resource "aws_ecs_task_definition" "pratyushNginx" {
   family                = "pratyushNginx"
-  container_definitions = file("./task-definitions.json")
+  container_definitions = data.template_file.container-definition.rendered
+}
+
+data "template_file" "container-definition" {
+  template = file("${path.module}/task-definition.json")
+}
+
+resource "aws_lb_listener" "front_end" {
+  load_balancer_arn = var.ecs-lb-arn
+  port              = "80"
+  protocol          = "HTTP"
+
+  default_action {
+    type             = "forward"
+    target_group_arn = var.ecs-target-group-arn
+  }
 }
 
 resource "aws_ecs_service" "Service" {
@@ -24,6 +39,8 @@ resource "aws_ecs_service" "Service" {
     	container_port    = 80
     	container_name    = "nginx"
 	}
+
+  depends_on = ["aws_lb_listener.front_end"]
 
 }
 
