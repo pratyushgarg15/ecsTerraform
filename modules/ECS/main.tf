@@ -37,7 +37,14 @@ resource "aws_ecs_service" "Service" {
   deployment_minimum_healthy_percent = 100
   # iam_role = aws_iam_role.pratyush-ecs-service-role.name
 
-
+  ordered_placement_strategy {
+    type  = "spread"
+    field = "attribute:ecs.availability-zone"
+  }
+  ordered_placement_strategy {
+    type  = "spread"
+    field = "instanceId"
+  }
   	load_balancer {
     	target_group_arn  = var.ecs-target-group-arn
     	container_port    = 80
@@ -50,7 +57,6 @@ resource "aws_ecs_service" "Service" {
 
 resource "aws_iam_role" "pratyush-ecs-instance-role" {
   name = "pratyush-ecs-instance-role"
-  path = "/"
   assume_role_policy = data.aws_iam_policy_document.pratyush-ecs-instance-policy.json
 }
 
@@ -70,8 +76,7 @@ resource "aws_iam_role_policy_attachment" "pratyush-ecs-instance-role-attachment
 }
 
 resource "aws_iam_instance_profile" "pratyush-ecs-instance-profile" {
-    name = "ecs-instance-profile"
-    path = "/"
+    name = "pratyush-ecs-instance-profile"
     role = aws_iam_role.pratyush-ecs-instance-role.name
     
 }

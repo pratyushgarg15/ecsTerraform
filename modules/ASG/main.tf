@@ -27,6 +27,11 @@ resource "aws_autoscaling_group" "pratyushASG" {
   }
 }
 
+resource "aws_autoscaling_attachment" "asg_attach" {
+  autoscaling_group_name = aws_autoscaling_group.pratyushASG.name
+  alb_target_group_arn   = var.tg_arn
+}
+
 # resource "template_file" "ecs-launch-configuration-user-data" {
 #     template = file("${path.module}/userdata.sh")
 # }

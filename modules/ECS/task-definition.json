@@ -2,7 +2,7 @@
       {
         "name": "nginx",
         "image": "nginx:latest",
-        "memory": 128,
+        "memoryReservation": 128,
         "cpu": 128,
         "essential": true,
         "portMappings": [
@@ -11,15 +11,7 @@
             "hostPort": 0,
             "protocol": "tcp"
           }
-        ],
-        "logConfiguration": {
-            "logDriver": "awslogs",
-            "options": {
-                "awslogs-group": "awslogs-nginx-ecs",
-                "awslogs-region": "us-east-1",
-                "awslogs-stream-prefix": "nginx"
-            }
-        }
+        ]
       }
   ]
     
