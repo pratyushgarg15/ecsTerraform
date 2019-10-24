@@ -3,10 +3,15 @@ resource "aws_launch_template" "pratyushLT" {
   image_id                = "ami-0f846c06eb372f19a"
   instance_type           = "t2.micro"
   key_name                = "pat-key"
-  vpc_security_group_ids  = [var.security_group_id]
+  # vpc_security_group_ids  = [var.security_group_id]
   iam_instance_profile {
     name    = var.ecs-instance-profile-name
   } 
+    network_interfaces {
+      associate_public_ip_address = true
+      security_groups             = [var.security_group_id]
+    }
+
   #iam_instance_profile    = var.ecs-instance-profile-name
   user_data               = filebase64("${path.module}/userdata.sh")
 }
