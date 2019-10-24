@@ -4,6 +4,10 @@ resource "aws_ecs_cluster" "pratyushECS" {
 
 resource "aws_ecs_task_definition" "pratyushNginx" {
   family                = "pratyushNginx"
+  cpu                   = 256
+  memory                = 256
+  network_mode          = "bridge"
+  requires_compatibilities = ["EC2"]
   container_definitions = data.template_file.container-definition.rendered
 }
 
